@@ -3,12 +3,12 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
 # Copy the .csproj file from the hello-world-api folder and restore dependencies
-COPY ./hello-world-api/dotnet-hello-world.csproj ./hello-world-api/
-RUN dotnet restore ./hello-world-api/dotnet-hello-world.csproj
+COPY ./hello-world-api/hello-world-api.csproj ./hello-world-api/
+RUN dotnet restore ./hello-world-api/hello-world-api.csproj
 
 # Copy the remaining files from the hello-world-api folder and build the app
 COPY ./hello-world-api/. ./hello-world-api/
-RUN dotnet publish ./hello-world-api/dotnet-hello-world.csproj -c Release -o out
+RUN dotnet publish ./hello-world-api/hello-world-api.csproj -c Release -o out
 
 # Create a runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
