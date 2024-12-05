@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials')  // Set this in Jenkins Credentials
         AWS_EC2_IP = "${params.ENVIRONMENT == 'UAT' ? 'UAT-EC2-IP' : 'PROD-EC2-IP'}"
-        DOCKER_IMAGE = 'your-dockerhub-username/dotnet-hello-world'
+        DOCKER_IMAGE = 'vaibguptab/dotnet-hello-world'
         APP_NAME = 'dotnet-hello-world'
     }
     

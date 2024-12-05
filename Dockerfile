@@ -2,12 +2,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
-# Copy project files and restore dependencies
-COPY . ./
-RUN dotnet restore
+# Copy the .csproj file and restore dependencies
+COPY ./src/dotnet-hello-world.csproj ./src/
+RUN dotnet restore ./src/dotnet-hello-world.csproj
 
-# Build and publish the app
-RUN dotnet publish -c Release -o out
+# Copy the remaining files and build the app
+COPY . ./
+RUN dotnet publish ./src/dotnet-hello-world.csproj -c Release -o out
 
 # Create a runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
@@ -17,4 +18,3 @@ COPY --from=build /app/out .
 # Expose the port and run the app
 EXPOSE 80
 ENTRYPOINT ["dotnet", "dotnet-hello-world.dll"]
-
